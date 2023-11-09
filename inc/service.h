@@ -59,7 +59,6 @@ public:
   // TODO: find a solution for this
   static Service fromRequestId(uint16_t serviceId) {
     Service service;
-    std::cout << +serviceId << std::endl;
     switch (serviceId) {
       case 0x22: service = Service(ReadDataByIdentifer()); break;
       case 0x11: service =  Service(ECUReset()); break;
@@ -76,11 +75,4 @@ private:
   std::vector<std::uint16_t> serviceData;
   
 };
-
-
-
-
-
-
-
 

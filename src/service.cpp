@@ -61,14 +61,16 @@ Service::Service(const Service& service) { // copy constructor
       serviceId = service.serviceId;
       serviceName = service.serviceName;
       serviceData = service.serviceData;
+      supportSubfunction = service.supportSubfunction;
       subfunction_ = service.subfunction_;
     }
   }
 
+// TODO: fix this function
 std::string Service::serialize() {
   std::ostringstream oss;
   oss << serviceId;
-  if(supportSubfunction) {
+  if (supportSubfunction) { 
     oss << subfunction_;
   }
   if (!serviceData.empty()) { 
