@@ -1,5 +1,6 @@
 #include "service.h"
 #include "diagService.h"
+#include "metadata.h"
 #include <algorithm>
 #include <bitset>
 #include <cstddef>
@@ -72,9 +73,9 @@ Service::Service(const Service& service) { // copy constructor
 std::vector<uint8_t> Service::serialize() {
   std::vector<uint8_t> serializedPayload;
   if (supportSubfunction) {
-    serializedPayload.reserve(3 + serviceData.size());
+    serializedPayload.reserve(SERVICE_ID_SIZE + SERVICE_SUBFUNCTION_SIZE + serviceData.size());
   } else {
-    serializedPayload.reserve(2 + serviceData.size());
+    serializedPayload.reserve(SERVICE_ID_SIZE + serviceData.size());
   }
   // add the ID 
   serializedPayload.push_back(static_cast<uint8_t>((serviceId >> 8) & 0xFF));
