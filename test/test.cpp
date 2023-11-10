@@ -10,6 +10,6 @@ TEST(TestTopic, TrivialEquality) {
 }
 
 TEST(TestTopic, MoreEqualityTests) {
-  ASSERT_EQ(GetTheMeaningOfLife(), 0) << "failed!!";
+  ASSERT_EQ(GetTheMeaningOfLife(), 42) << "failed!!";
   EXPECT_FLOAT_EQ(2.2F, 2.2F);
 }
