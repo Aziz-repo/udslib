@@ -6,11 +6,13 @@
 #include <cstdint>
 #include <cstring>
 #include <exception>
+#include <iterator>
 #include <ostream>
 #include <sstream>
 #include <utility>
 #include <vector>
 #include <stdexcept>
+#include <cstring>
 
 
 Service::Service(const NonSubFuncService& service) {
@@ -67,18 +69,29 @@ Service::Service(const Service& service) { // copy constructor
   }
 
 // TODO: fix this function
-std::string Service::serialize() {
-  std::ostringstream oss;
-  oss << serviceId;
-  if (supportSubfunction) { 
-    oss << subfunction_;
+std::vector<uint8_t> Service::serialize() {
+  std::vector<uint8_t> serializedPayload;
+  if (supportSubfunction) {
+    serializedPayload.reserve(3 + serviceData.size());
+  } else {
+    serializedPayload.reserve(2 + serviceData.size());
   }
-  if (!serviceData.empty()) { 
-    for(const uint16_t& data : serviceData) {
-      oss << data;
-    }
+  // add the ID 
+  serializedPayload.push_back(static_cast<uint8_t>((serviceId >> 8) & 0xFF));
+  serializedPayload.push_back(static_cast<uint8_t>((serviceId & 0xFF)));
+
+  // add the subfunction if exists 
+  if (supportSubfunction) {
+    serializedPayload.push_back(subfunction_);
   }
-  return oss.str();
+
+  // add the service request data 
+  for (uint16_t data : serviceData) {
+    serializedPayload.push_back(static_cast<uint8_t>(data >> 8) & 0xFF);
+    serializedPayload.push_back(static_cast<uint8_t>(data & 0xFF));
+  }
+
+  return serializedPayload;
 }
 
 Service& Service::operator=(const Service& other) {

@@ -29,9 +29,8 @@ public:
   friend bool operator!=(const Request&, const Request&);
   friend std::ostream& operator<<(std::ostream&, const Request&);
   
-  std::string getPayload();
+  std::vector<uint8_t> getPayload();
   
-  // TODO: dangerous segmetation fault
   static Request fromPayload(std::string rawRequest) {
     Request req;
     uint8_t Id = std::atoi(rawRequest.substr(0, 2).c_str());

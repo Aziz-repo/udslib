@@ -44,7 +44,7 @@ public:
   void setServiceData(std::vector<std::uint16_t> serviceData) { this->serviceData = serviceData; }
 
   // serialize and deserialize
-  std::string serialize();
+  std::vector<uint8_t> serialize();
 
   void deserialize();
 
@@ -56,7 +56,6 @@ public:
     return serviceData;
   } 
 
-  // TODO: find a solution for this
   static Service fromRequestId(uint16_t serviceId) {
     Service service;
     switch (serviceId) {
@@ -69,7 +68,7 @@ public:
 
 private:
   std::uint16_t serviceId;
-  std::uint8_t subfunction_ = 0;
+  uint8_t subfunction_ = 0;
   bool supportSubfunction;
   std::string serviceName;
   std::vector<std::uint16_t> serviceData;

@@ -40,7 +40,7 @@ std::ostream& operator<<(std::ostream& out, const Request& req) {
   return out;
 }
 
-std::string Request::getPayload() {
+std::vector<uint8_t> Request::getPayload() {
   return m_service.serialize();
 }
 
