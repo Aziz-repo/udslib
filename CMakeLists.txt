@@ -17,6 +17,8 @@ file(GLOB testFiles ${TEST}/*.cpp)
 
 add_executable(${PROJECT_NAME}  main.cpp ${uds})
 target_link_options(${PROJECT_NAME} PUBLIC -std=c++20 -Wall)
+
+include(cmake/UpdateSubmodules.cmake)
 include(CTest)
 add_subdirectory(external)
 
