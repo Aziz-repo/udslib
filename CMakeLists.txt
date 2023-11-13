@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 set(CMAKE_CXX_COMPILER "/usr/bin/g++-11") # set the compiler to support c++20 features
-project(udslib
+project(libuds
     VERSION 1.0.0
     DESCRIPTION "ISO-14229 implementation"
     LANGUAGES CXX)
