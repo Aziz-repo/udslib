@@ -9,7 +9,7 @@ Response::Response(Service& service, ResponseCode code, std::vector<uint16_t>& d
     : m_service(service), m_code(code), m_data(data) {}
 
 Response::Response(Service& service, ResponseCode code) : m_service(service), m_code(code) {
-  if (!m_service.getServiceData().empty()) {
+  if (!m_service.hasData()) {
     m_data = m_service.getServiceData();
   }
 }
@@ -25,6 +25,6 @@ bool operator!=(Response& resp, Response& other) {
 
 std::ostream& Response::operator<<(std::ostream& out) {
   out << "<" << m_code << ": [" << m_service.getServiceName() << "] - " 
-      <<  m_service.getServiceData().size()<< " data bytes." ;
+      <<  m_service.getServiceDataSize() << " data bytes." ;
   return out;
 }

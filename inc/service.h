@@ -38,6 +38,9 @@ public:
   std::vector<std::uint16_t> getServiceData() const { return serviceData; }
   std::uint8_t getSubfunction() const { return subfunction_; }
   bool getSupportSubFunction() const { return supportSubfunction; }
+  size_t getServiceDataSize() const { return serviceData.size(); }
+  
+  bool hasData() const { return serviceData.empty(); }
 
   // setter
   void setSubfunction(uint8_t subfunction) { this->subfunction_ = subfunction; }
