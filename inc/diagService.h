@@ -27,7 +27,7 @@ struct SubFuncService : public DiagService {
 struct ReadDataByIdentifer : public NonSubFuncService {
   ReadDataByIdentifer() {
     this->serviceName = "ReadDataByIdentifer";
-    this->serviceId = std::uint16_t(RDBI);
+    this->serviceId = std::uint8_t(RDBI);
     this->supportSubFunc = false;
   }
 };
@@ -35,7 +35,7 @@ struct ReadDataByIdentifer : public NonSubFuncService {
 struct WriteDataByIdentifer : public NonSubFuncService {
   WriteDataByIdentifer() {
     this->serviceName = "WriteDataByIdentifer";
-    this->serviceId = std::uint16_t(WDBI);
+    this->serviceId = std::uint8_t(WDBI);
     this->supportSubFunc = false;
   }
 };
@@ -43,7 +43,7 @@ struct WriteDataByIdentifer : public NonSubFuncService {
 struct ECUReset : public SubFuncService {
   ECUReset() {
     this->serviceName = "ECUReset";
-    this->serviceId = std::uint16_t(ECUR);
+    this->serviceId = std::uint8_t(ECUR);
     this->supportSubFunc = true;
   }
 };

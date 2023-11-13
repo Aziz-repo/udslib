@@ -78,7 +78,6 @@ std::vector<uint8_t> Service::serialize() {
     serializedPayload.reserve(SERVICE_ID_SIZE + serviceData.size());
   }
   // add the ID 
-  serializedPayload.push_back(static_cast<uint8_t>((serviceId >> 8) & 0xFF));
   serializedPayload.push_back(static_cast<uint8_t>((serviceId & 0xFF)));
 
   // add the subfunction if exists 

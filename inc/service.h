@@ -67,7 +67,7 @@ public:
   }
 
 private:
-  std::uint16_t serviceId;
+  std::uint8_t serviceId;
   uint8_t subfunction_ = 0;
   bool supportSubfunction;
   std::string serviceName;

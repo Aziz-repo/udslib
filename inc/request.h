@@ -1,3 +1,5 @@
+#pragma once
+
 #include "diagService.h"
 #include "service.h"
 #include <cstdint>
