@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ostream>
 #define SERVICE_ID_SIZE              1
 #define SERVICE_SUBFUNCTION_SIZE     1
 
@@ -12,4 +13,14 @@
 //
 enum class ResponseCode {
   PositiveResponse = 0,
+
 };
+
+std::ostream& operator<<(std::ostream& out, ResponseCode& code) {
+  switch (code) {
+    case ResponseCode::PositiveResponse:
+      out << "PositiveResponse";
+      break;
+  }
+  return out;
+}

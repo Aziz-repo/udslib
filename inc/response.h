@@ -3,12 +3,14 @@
 #include "metadata.h"
 #include "service.h"
 #include <cstdint>
+#include <ostream>
 #include <vector>
 
 class Response {
 public:
   Response() = default;
   Response(Service&, ResponseCode, std::vector<uint16_t>&);
+  Response(Service&, ResponseCode);
   Response(Response &&) = default;
   Response(const Response &) = default;
   Response &operator=(Response &&) = default;
@@ -17,6 +19,11 @@ public:
 
   // getters
   ResponseCode getResponseCode() const { return m_code; }
+  
+  // operators
+  friend bool operator==(Response&, Response&);
+  friend bool operator!=(Response&, Response&);
+  std::ostream& operator<<(std::ostream&);
 
   std::vector<uint8_t> getPayload();
   static Response fromPayload() {
