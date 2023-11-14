@@ -9,6 +9,8 @@
 #include <vector>
 #include <ranges>
 
+using namespace uds;
+
 Response::Response(Service& service, ResponseCode code, std::vector<uint8_t>& data)
     : m_service(service), m_code(code), m_data(data) {}
 

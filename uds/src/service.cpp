@@ -15,6 +15,7 @@
 #include <stdexcept>
 #include <cstring>
 
+using namespace uds;
 
 Service::Service(const NonSubFuncService& service) {
     serviceId = service.serviceId;

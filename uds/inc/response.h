@@ -6,33 +6,43 @@
 #include <ostream>
 #include <vector>
 
-class Response {
-public:
-  Response() = default;
-  Response(Service&, ResponseCode, std::vector<uint8_t>&);
-  Response(Service&, ResponseCode);
-  Response(Response &&) = default;
-  Response(const Response &) = default;
-  Response &operator=(Response &&) = default;
-  Response &operator=(const Response &) = default;
-  ~Response() = default;
+namespace uds { class Response; } 
 
-  // getters
-  ResponseCode getResponseCode() const { return m_code; }
+bool operator==(uds::Response&, uds::Response&);
+bool operator!=(uds::Response&, uds::Response&);
+std::ostream& operator<<(std::ostream&, const uds::Response&);
+
+namespace uds {
   
-  // operators
-  friend bool operator==(Response&, Response&);
-  friend bool operator!=(Response&, Response&);
-  friend std::ostream& operator<<(std::ostream&, const Response&);
+  class Response {
+  public:
+    Response() = default;
+    Response(Service&, ResponseCode, std::vector<uint8_t>&);
+    Response(Service&, ResponseCode);
+    Response(Response &&) = default;
+    Response(const Response &) = default;
+    Response &operator=(Response &&) = default;
+    Response &operator=(const Response &) = default;
+    ~Response() = default;
 
-  std::vector<uint8_t> getPayload(int size);
-  static Response fromPayload();
+    // getters
+    ResponseCode getResponseCode() const { return m_code; }
+    
+    // operators
+    friend bool ::operator==(Response&, Response&);
+    friend bool ::operator!=(Response&, Response&);
+    friend std::ostream& ::operator<<(std::ostream&, const Response&);
 
-private:
-  Service m_service;
-  ResponseCode m_code;
-  std::vector<uint8_t> m_data;
-  
-};
+    std::vector<uint8_t> getPayload(int size);
+    static Response fromPayload();
+
+  private:
+    Service m_service;
+    ResponseCode m_code;
+    std::vector<uint8_t> m_data;
+    
+  };
+
+}
 
 

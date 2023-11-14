@@ -6,6 +6,7 @@
 #include <variant>
 #include <vector>
 
+using namespace uds;
 
 Request::Request(const Service& svc) : m_service(svc) {
   if(!svc.getServiceData().empty()) {
