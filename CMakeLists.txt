@@ -8,11 +8,12 @@ project(libuds
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(SRC src)
 set(TEST test)
+set(UDS uds)
 
-include_directories(inc)
+include_directories(${UDS}/inc)
 include_directories(SYSTEM /usr/include/c++/${CMAKE_CXX_COMPILER_VERSION})
 
-file(GLOB uds ${SRC}/*.cpp)
+file(GLOB uds ${UDS}/${SRC}/*.cpp)
 file(GLOB testFiles ${TEST}/*.cpp)
 
 add_executable(${PROJECT_NAME}  main.cpp ${uds})
