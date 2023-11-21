@@ -13,7 +13,7 @@ public:
   UDSConfiguration() = default;
   ~UDSConfiguration() = default;
 
-  void loadConfiguration(std::filesystem::path &);
+  void loadConfiguration(const std::filesystem::path &);
   std::string getConfiguration(std::string &);
   void trimConfiguration(std::string &);
 
