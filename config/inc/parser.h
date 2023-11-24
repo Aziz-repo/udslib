@@ -1,11 +1,13 @@
 #pragma once
 
+#include "metadata.h"
 #include <algorithm>
 #include <cctype>
 #include <filesystem>
 #include <iterator>
 #include <map>
 #include <string>
+#include <vector>
 
 namespace uds {
 class UDSConfiguration {
@@ -13,26 +15,13 @@ public:
   UDSConfiguration() = default;
   ~UDSConfiguration() = default;
 
-  void loadConfiguration(const std::filesystem::path &);
+  void loadConfiguration(const std::string &);
   std::string getConfiguration(std::string &);
-  void trimConfiguration(std::string &);
+
+  // getters
+  std::vector<DID> getDidConfiguration() const { return dids_configuration; }
 
 private:
-
-  static inline std::string &ltrim(std::string &s) {
-    s.erase(s.begin(), std::find_if(s.begin(), s.end(),
-                                    [](int c) { return !std::isspace(c); }));
-    return s;
-  }
-
-  static inline std::string &rtrim(std::string &s) {
-    s.erase(std::find_if(s.rbegin(), s.rend(),
-                         [](int c) { return !std::isspace(c); })
-                .base(),
-            s.end());
-    return s;
-  }
-
-  std::map<std::string, std::string> configuration_options_;
+  std::vector<DID> dids_configuration;
 };
 } // namespace uds
