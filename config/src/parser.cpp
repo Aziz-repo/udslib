@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <iostream>
 #include <iterator>
+#include <mutex>
 #include <stdexcept>
 #include <string>
 #include <sys/types.h>
@@ -17,6 +18,10 @@
 #include <vector>
 
 using namespace uds;
+
+UDSConfiguration *UDSConfiguration::instance_{nullptr};
+std::mutex UDSConfiguration::mutex_;
+
 // Greedy
 void UDSConfiguration::loadConfiguration(const std::string &config_path) {
   try {
@@ -45,7 +50,6 @@ void UDSConfiguration::loadConfiguration(const std::string &config_path) {
       // push the did to the configuration member
       dids_configuration.push_back(did);
     }
-    // TODO: add custom exception
   } catch (const toml::syntax_error &e) {
     throw SyntaxException(std::string(e.what()));
   } catch (const toml::type_error &e) {
@@ -68,4 +72,12 @@ DID UDSConfiguration::getDidConfiguration(uint16_t id) const {
     throw ConfigNotFoundException("DID not found in the config file\n");
   }
   return *found;
+}
+
+UDSConfiguration *UDSConfiguration::getInstance() {
+  std::lock_guard<std::mutex> lock(mutex_);
+  if (instance_ == nullptr) {
+    instance_ = new UDSConfiguration();
+  }
+  return instance_;
 }
