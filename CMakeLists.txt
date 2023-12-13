@@ -11,18 +11,21 @@ set(SRC src)
 set(TEST test)
 set(UDS uds)
 set(PARSER config)
+set(EXCEPTION exception)
 set(EXTERNAL external)
 
 set(EXTERNAL_LIBS_HEADERS ${EXTERNAL}/toml11/)
 message(STATUS ${EXTERNAL_LIBS_HEADERS})
 include_directories(${UDS}/inc)
 include_directories(${PARSER}/inc)
+include_directories(${EXCEPTION}/inc)
 
 file(GLOB uds ${UDS}/${SRC}/*.cpp)
 file(GLOB config ${PARSER}/${SRC}/*.cpp)
 file(GLOB testFiles ${TEST}/*.cpp)
+file(GLOB exception ${EXCEPTION}/*.h)
 
-add_executable(${PROJECT_NAME} main.cpp ${config} ${uds})
+add_executable(${PROJECT_NAME} main.cpp ${config} ${uds} ${exception})
 target_include_directories(${PROJECT_NAME} PRIVATE ${EXTERNAL_LIBS_HEADERS})
 target_link_options(${PROJECT_NAME} PUBLIC -std=c++20 -Wall)
 
