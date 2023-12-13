@@ -2,7 +2,6 @@
 
 #include "metadata.h"
 #include <cstdint>
-#include <optional>
 #include <string>
 #include <vector>
 
@@ -19,7 +18,7 @@ public:
   [[nodiscard]] std::vector<DID> getDidConfigurations() const {
     return dids_configuration;
   }
-  [[nodiscard]] std::optional<DID> getDidConfiguration(uint16_t) const;
+  [[nodiscard]] DID getDidConfiguration(uint16_t) const;
 
 private:
   std::vector<DID> dids_configuration;

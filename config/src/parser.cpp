@@ -9,11 +9,11 @@
 #include <cstdint>
 #include <iostream>
 #include <iterator>
-#include <optional>
 #include <stdexcept>
 #include <string>
 #include <sys/types.h>
 #include <toml.hpp>
+#include <udsException.h>
 #include <vector>
 
 using namespace uds;
@@ -47,14 +47,11 @@ void UDSConfiguration::loadConfiguration(const std::string &config_path) {
     }
     // TODO: add custom exception
   } catch (const toml::syntax_error &e) {
-    std::cout << "Syntax Error"
-              << "Reason: " << e.what() << std::endl;
+    throw SyntaxException(std::string(e.what()));
   } catch (const toml::type_error &e) {
-    std::cout << "Type Error"
-              << "Reason: " << e.what() << std::endl;
+    throw TypeException(std::string(e.what()));
   } catch (const std::out_of_range &e) {
-    std::cout << "Out Of Range Error"
-              << "Reason: " << e.what() << std::endl;
+    throw OutOfRangeException(std::string(e.what()));
   } catch (const std::runtime_error &e) {
     std::cout << "Runtime Error"
               << "Reason: " << e.what() << std::endl;
@@ -63,9 +60,12 @@ void UDSConfiguration::loadConfiguration(const std::string &config_path) {
 
 std::string UDSConfiguration::getConfiguration(std::string &s) { return s; }
 
-std::optional<DID> UDSConfiguration::getDidConfiguration(uint16_t id) const {
+DID UDSConfiguration::getDidConfiguration(uint16_t id) const {
   auto found =
       (std::find_if(dids_configuration.begin(), dids_configuration.end(),
                     [&id](const DID &did) { return did.id == id; }));
-  return std::optional<DID>{*found};
+  if (found == dids_configuration.end()) {
+    throw ConfigNotFoundException("DID not found in the config file\n");
+  }
+  return *found;
 }
