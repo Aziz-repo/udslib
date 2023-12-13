@@ -1,11 +1,8 @@
 #pragma once
 
 #include "metadata.h"
-#include <algorithm>
-#include <cctype>
-#include <filesystem>
-#include <iterator>
-#include <map>
+#include <cstdint>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -19,7 +16,10 @@ public:
   std::string getConfiguration(std::string &);
 
   // getters
-  std::vector<DID> getDidConfiguration() const { return dids_configuration; }
+  [[nodiscard]] std::vector<DID> getDidConfigurations() const {
+    return dids_configuration;
+  }
+  [[nodiscard]] std::optional<DID> getDidConfiguration(uint16_t) const;
 
 private:
   std::vector<DID> dids_configuration;
