@@ -20,6 +20,12 @@ namespace uds {
 
 #define NACK_CODE 0x7F
 
+#define NAME "name"
+#define SIZE "size"
+#define DESCRIPTION "description"
+#define ID "id"
+#define SESSION "session"
+
 enum class ResponseCode {
   PositiveResponse = 0,
 
@@ -31,5 +37,7 @@ struct DID {
   uint16_t id;
   int size;
   std::vector<uint8_t> sessions;
+
+  bool operator==(const uint16_t &id) const { return this->id == id; }
 };
 } // namespace uds
