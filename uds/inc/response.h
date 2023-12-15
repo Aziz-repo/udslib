@@ -1,3 +1,11 @@
+/*!
+ * @file response.h
+ * @author M.Aziz Hassene
+ * @brief Abstracts the response payload.
+ * @version v1.0.0
+ * @date 2023-12-15
+ *
+ * */
 #pragma once
 
 #include "metadata.h"
@@ -28,7 +36,15 @@ public:
   ~Response() = default;
 
   // getters
+
+  /*!
+   * @brief Returns the response code
+   */
   [[nodiscard]] ResponseCode getResponseCode() const { return m_code; }
+
+  /*!
+   * @brief Checks if the response is positve or not.
+   */
   [[nodiscard]] bool isPositve() const {
     return m_code == ResponseCode::PositiveResponse ? true : false;
   }
@@ -38,8 +54,17 @@ public:
   friend bool ::operator!=(Response &, Response &);
   friend std::ostream & ::operator<<(std::ostream &, const Response &);
 
-  std::vector<uint8_t> getPayload(int = 0);
-  static Response fromPayload(const std::vector<uint8_t> &);
+  /*!
+   * @brief Serialize the Response object into an UDS payload.
+   * @param size of the intended data. (Default to 0 in case of negative
+   * response)
+   */
+  std::vector<uint8_t> getPayload(int size = 0);
+  /*!
+   * @brief Deserialize the response payload into a Response object.
+   * @param payload intended to be converted to a Response object.
+   */
+  static Response fromPayload(const std::vector<uint8_t> &payload);
 
 private:
   Service m_service;

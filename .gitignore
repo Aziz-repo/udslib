@@ -2,3 +2,5 @@ build/
 main.cpp
 .cache
 .clangd
+docs/html
+docs/latex

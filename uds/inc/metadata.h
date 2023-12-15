@@ -1,3 +1,11 @@
+/*!
+ *  @file metadata.h
+ *  @author M.Aziz Hassene
+ *  @brief This file contains the helper enums and macros.
+ *  @version v1.0.0
+ *  @date  2023-12-15
+ */
+
 #pragma once
 
 #include <cstdint>
@@ -39,6 +47,10 @@ enum class ResponseCode {
   RequestSequenceError = 0x24,
 };
 
+/*!
+ * @brief A struct that wraps the Data Identifier.
+ * @note This strcut can be created from the configuration provided by the user.
+ */
 struct DID {
   std::string name;
   std::string description;

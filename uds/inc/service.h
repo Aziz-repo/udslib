@@ -1,3 +1,10 @@
+/*!
+ * @file service.h
+ * @author M.Aziz Hassene
+ * @brief Abstracts the service structures
+ * @version v1.0.0
+ * @date 2023-12-15
+ */
 #pragma once
 
 #include <cstddef>
@@ -59,11 +66,18 @@ public:
     this->serviceData = serviceData;
   }
 
-  // serialize and deserialize
+  /*!
+   * @brief Serializes the service object.
+   * @note This function is used by Request's getPayload method.
+   */
   std::vector<uint8_t> serialize();
 
-  void deserialize();
+  // void deserialize();
 
+  /*!
+   * @brief Used to log the service data to the console
+   * @note This method was written for pure testing reasons.
+   */
   static std::string logServiceData(const Service &service) {
     std::string serviceData;
     for (auto &e : service.serviceData) {
@@ -72,6 +86,13 @@ public:
     return serviceData;
   }
 
+  /*!
+   * @brief Return a shollow Service object based on the service ID.
+   * @note Shallow service means a service object without the service data
+   * member.
+   * @param serviceId The service ID.
+   *
+   */
   static Service fromRequestId(uint8_t serviceId) {
     Service service;
     switch (serviceId) {
@@ -88,16 +109,38 @@ public:
     return service;
   }
 
-  static Service fromResponseId(uint16_t serviceId) {
-    Service service = Service::fromRequestId((serviceId - PRESPONSE_IND));
+  /*!
+   * @brief Returns a Service object from the Response code.
+   * @note This method uses the fromRequestId.
+   * @param responseID The code returned by the ECU
+   *
+   */
+  // TODO: change to treat the negative response.
+  static Service fromResponseId(uint16_t responseID) {
+    Service service = Service::fromRequestId((responseID - PRESPONSE_IND));
     return service;
   }
 
 private:
+  /*!
+   * @brief Service ID (SID)
+   */
   std::uint8_t serviceId;
+  /*!
+   * @brief Subfunctoin to use in the Service.
+   */
   uint8_t subfunction_ = 0;
+  /*!
+   * @brief Defines if the Service support subfnuction or not.
+   */
   bool supportSubfunction;
+  /*!
+   * @brief Defines the service name.
+   */
   std::string serviceName;
+  /*!
+   * @brief Defines the trailing Service data.
+   */
   std::vector<std::uint16_t> serviceData;
 };
 } // namespace uds
