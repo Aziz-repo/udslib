@@ -117,7 +117,8 @@ std::ostream &operator<<(std::ostream &out, const Service &svc) {
 }
 
 Service Service::operator()(const NonSubFuncService &svc) {
-  return Service(svc);
+  // return Service(svc);
+  return {svc};
 }
 
-Service Service::operator()(const SubFuncService &svc) { return Service(svc); }
+Service Service::operator()(const SubFuncService &svc) { return {svc}; }
