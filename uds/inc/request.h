@@ -28,8 +28,8 @@ public:
   ~Request() = default;
 
   // getter
-  Service getService() const { return m_service; }
-  std::vector<uint16_t> getRequestData() const { return m_data; }
+  [[nodiscard]] Service getService() const { return m_service; }
+  [[nodiscard]] std::vector<uint16_t> getRequestData() const { return m_data; }
 
   // setter
   void setRequestData(const std::vector<uint16_t> &data) { m_data = data; }

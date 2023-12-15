@@ -40,14 +40,18 @@ public:
   Service operator()(const SubFuncService &);
 
   // getter
-  uint8_t getServiceId() const { return serviceId; }
-  std::string getServiceName() const { return serviceName; }
-  std::vector<std::uint16_t> getServiceData() const { return serviceData; }
-  std::uint8_t getSubfunction() const { return subfunction_; }
-  bool getSupportSubFunction() const { return supportSubfunction; }
-  size_t getServiceDataSize() const { return serviceData.size(); }
+  [[nodiscard]] uint8_t getServiceId() const { return serviceId; }
+  [[nodiscard]] std::string getServiceName() const { return serviceName; }
+  [[nodiscard]] std::vector<std::uint16_t> getServiceData() const {
+    return serviceData;
+  }
+  [[nodiscard]] std::uint8_t getSubfunction() const { return subfunction_; }
+  [[nodiscard]] bool getSupportSubFunction() const {
+    return supportSubfunction;
+  }
+  [[nodiscard]] size_t getServiceDataSize() const { return serviceData.size(); }
 
-  bool hasData() const { return serviceData.empty(); }
+  [[nodiscard]] bool hasData() const { return serviceData.empty(); }
 
   // setter
   void setSubfunction(uint8_t subfunction) { this->subfunction_ = subfunction; }
