@@ -19,6 +19,7 @@ namespace uds {
 #define CDS 0x85  // Control DTC Settings
 
 #define NACK_CODE 0x7F
+#define PRESPONSE_IND 0x40
 
 #define NAME "name"
 #define SIZE "size"
@@ -28,7 +29,14 @@ namespace uds {
 
 enum class ResponseCode {
   PositiveResponse = 0,
-
+  GeneralReject = 0x10,
+  ServiceNotSupported = 0x11,
+  SubFunctionNotSupported = 0x12,
+  InvalidMessageLengthOrFormat = 0x13,
+  ResponseTooLong = 0x14,
+  BusyRepeatRequest = 0x21,
+  ConditionsNotCorrect = 0x22,
+  RequestSequenceError = 0x24,
 };
 
 struct DID {
