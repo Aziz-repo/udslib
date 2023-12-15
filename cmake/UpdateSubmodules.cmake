@@ -1,4 +1,5 @@
 # Adapted from https://cliutils.gitlab.io/modern-cmake/chapters/projects/submodule.html
+
 find_package(Git QUIET)
 if(GIT_FOUND)
     option(UPDATE_SUBMODULES "Check submodules during build" ON)

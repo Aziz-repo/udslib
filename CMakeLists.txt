@@ -15,7 +15,9 @@ set(EXCEPTION exception)
 set(EXTERNAL external)
 
 set(EXTERNAL_LIBS_HEADERS ${EXTERNAL}/toml11/)
-message(STATUS ${EXTERNAL_LIBS_HEADERS})
+
+option(BUILD_DOC "Build documentation" OFF)
+
 include_directories(${UDS}/inc)
 include_directories(${PARSER}/inc)
 include_directories(${EXCEPTION}/inc)
@@ -39,4 +41,8 @@ if(BUILD_TESTING)
   
   include(GoogleTest)
   gtest_discover_tests(example)
+endif()
+
+if(BUILD_DOC)
+  include(cmake/GenerateDocs.cmake)
 endif()
