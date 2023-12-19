@@ -58,7 +58,7 @@ public:
   }
   [[nodiscard]] size_t getServiceDataSize() const { return serviceData.size(); }
 
-  [[nodiscard]] bool hasData() const { return serviceData.empty(); }
+  [[nodiscard]] bool hasData() const { return !serviceData.empty(); }
 
   // setter
   void setSubfunction(uint8_t subfunction) { this->subfunction_ = subfunction; }
@@ -93,6 +93,7 @@ public:
    * @param serviceId The service ID.
    *
    */
+  // TODO: change to static_cast
   static Service fromRequestId(uint8_t serviceId) {
     Service service;
     switch (serviceId) {

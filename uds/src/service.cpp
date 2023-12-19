@@ -12,7 +12,7 @@ Service::Service(const NonSubFuncService &service) {
   serviceId = service.serviceId;
   serviceName = service.serviceName;
   supportSubfunction = service.supportSubFunc;
-  serviceData = {0};
+  serviceData = {};
 }
 
 Service::Service(const SubFuncService &service, uint8_t subfunction) {
